@@ -117,19 +117,21 @@ function updatePrice() {
   totalcents = totalinCents % 100;
 }
 
+
+// Whatsapp message update
 carticon.onclick = () => {
-  updatePrice();
-  for (let index = 0; index < items.length; index++) {
-    if (items[index].number != 0) {
-      console.log(
-        "Item name: " +
-          items[index].name +
-          " & number of item: " +
-          items[index].number
-      );
+    updatePrice();
+    let orderDetails = "";
+    for (let index = 0; index < items.length; index++) {
+      if (items[index].number !== 0) {
+        orderDetails +=
+          `${items[index].name}: ${items[index].number} | `;
+      }
     }
-  }
-  console.log(
-    "The amount is " + totalDollars + "$ and " + totalcents + " cents"
-  );
-};
+  
+    const whatsappMessage = `Order Details:\n${orderDetails}\nTotal Amount: $${totalDollars}.${totalcents}`;
+    const whatsappLink = `https://wa.me/9042315687?text=${(whatsappMessage)}`;
+
+    window.open(whatsappLink);
+
+  };
